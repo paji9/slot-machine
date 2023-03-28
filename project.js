@@ -13,8 +13,18 @@
 //}
 const prompt = require("prompt-sync")(); //user input via "prompt-sync" from package install
 
-const deposit = () => { //ES6 of creating functions
-    const depositAmount = prompt("Enter a deposit amount: ")
+const deposit = () => { //ES6 version of creating functions
+    while (true) { //infinite loop
+        const depositAmount = prompt("Enter a deposit amount: ");
+        const numberDepositAmount = parseFloat(depositAmount); //parseFloat() function takes inputed sting from 'prompt' and returns a floating point number
+
+        if (isNaN(numberDepositAmount) || numberDepositAmount <= 0) { //conditioanl that check for valid 'number'
+            console.log("Invalid deposit amount, try again.");
+        } else {
+            return numberDepositAmount; //infinite loop broken if input is valid
+        }
+    }
+    
 }
 
-deposit();
+const depositAmount = deposit();
