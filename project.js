@@ -37,7 +37,21 @@ const getNumberOfLines = () => {
             return numberofLines; //infinite loop broken if input is valid
         }
     }
-}
+};
+
+const getBet = (balance) => { //'balance' parameter; need to pass value to this function when called
+    while (true) { //infinite loop
+        const bet = prompt("Enter the total bet: ");
+        const numberBet = parseFloat(bet); //parseFloat() function takes inputed sting from 'prompt' and returns a floating point number
+
+        if (isNaN(numberBet) || numberBet <=0 || numberBet > balance) {
+            console.log("Invalid bet, try again.");
+        } else {
+            return numberBet; //infinite loop broken if input is valid
+        }
+    }
+};
 
 let balance = deposit();
 const numberofLines = getNumberOfLines();
+const bet = getBet(balance);
