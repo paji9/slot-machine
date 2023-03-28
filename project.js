@@ -8,3 +8,13 @@
 7. Play again
 */
 
+//function deposit() { //same syntax has function decleartion below
+    
+//}
+const prompt = require("prompt-sync")(); //user input via "prompt-sync" from package install
+
+const deposit = () => { //ES6 of creating functions
+    const depositAmount = prompt("Enter a deposit amount: ")
+}
+
+deposit();
