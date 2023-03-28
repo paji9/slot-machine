@@ -9,7 +9,7 @@
 */
 
 //function deposit() { //same syntax has function decleartion below
-    
+//   
 //}
 const prompt = require("prompt-sync")(); //user input via "prompt-sync" from package install
 
@@ -23,8 +23,21 @@ const deposit = () => { //ES6 version of creating functions
         } else {
             return numberDepositAmount; //infinite loop broken if input is valid
         }
+    }   
+};
+
+const getNumberOfLines = () => {
+    while (true) { //infinite loop
+        const lines = prompt("Enter the number of lines to bet (1-3): ");
+        const numberofLines = parseFloat(lines); //parseFloat() function takes inputed sting from 'prompt' and returns a floating point number
+
+        if (isNaN(numberofLines) || numberofLines <= 0 || numberofLines > 3) { //conditioanl that check for valid 'number'
+            console.log("Invalid number of lines, try again.");
+        } else {
+            return numberofLines; //infinite loop broken if input is valid
+        }
     }
-    
 }
 
 const depositAmount = deposit();
+const numberofLines = getNumberOfLines();
