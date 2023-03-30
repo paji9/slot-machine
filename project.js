@@ -55,12 +55,12 @@ const deposit = () => { //ES6 version of creating functions
 const getNumberOfLines = () => {
     while (true) { //infinite loop
         const lines = prompt("Enter the number of lines to bet (1-3): ");
-        const numberofLines = parseFloat(lines); //parseFloat() function takes inputed sting from 'prompt' and returns a floating point number
+        const numberOfLines = parseFloat(lines); //parseFloat() function takes inputed sting from 'prompt' and returns a floating point number
 
-        if (isNaN(numberofLines) || numberofLines <= 0 || numberofLines > 3) { //conditioanl that check for valid 'number'
+        if (isNaN(numberOfLines) || numberOfLines <= 0 || numberOfLines > 3) { //conditioanl that check for valid 'number'
             console.log("Invalid number of lines, try again.");
         } else {
-            return numberofLines; //infinite loop broken if input is valid
+            return numberOfLines; //infinite loop broken if input is valid
         }
     }
 };
@@ -148,12 +148,30 @@ const getWinnings = (rows, bet, lines) => {
     return winnings;
 }
 
+const game = () => {
+    let balance = deposit();
 
-let balance = deposit();
-const numberofLines = getNumberOfLines();
-const bet = getBet(balance, numberofLines);
-const reels = spin();
-const rows = transpose(reels);
-printRows(rows);
-const winnings = getWinnings(rows, bet, numberofLines);
-console.log("You won, $" + winnings.toString());
+    while(true) {
+        console.log("You have a balance of $" + balance);
+        const numberOfLines = getNumberOfLines();
+        const bet = getBet(balance, numberOfLines);
+        balance -= bet * numberOfLines;
+        const reels = spin();
+        const rows = transpose(reels);
+        printRows(rows);
+        const winnings = getWinnings(rows, bet, numberOfLines);
+        balance += winnings;
+        console.log("You won, $" + winnings.toString());
+
+        if (balance <= 0) {
+            console.log("You are out of money...");
+            break;
+        }
+
+        const playAgain = prompt("Do you want to play again (Y/n)?");
+
+        if (playAgain != "Y") break;
+    }
+};
+
+game();
